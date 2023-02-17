@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: loadsgzs1435-tenant-component
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: loadsgzs1435-tenant-component
+    app.kubernetes.io/part-of: loadsgzs1435-tenant-app
+  name: loadsgzs1435-tenant-component
+  namespace: loadsgzs1435-tenant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-app
+      app.kubernetes.io/instance: loadsgzs1435-tenant-component
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: python-app
+        app.kubernetes.io/instance: loadsgzs1435-tenant-component
+    spec:
+      containers:
+      - image: quay.io/stonesoup_perfscale/test-images:1c4b5f65dff0404bb3f4594d4fc6eea1
+        name: my-python
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 50Mi
+status: {}
